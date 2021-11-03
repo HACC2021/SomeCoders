@@ -12,6 +12,8 @@ namespace HACC_PetPickupNotifications.Services
 
         public SecurityService()
         {
+            //This is just a place holder, we need to get these knownUsers from a database.
+            //Think we will come back to this later
             knownUsers.Add(new UserModel { Id = 00001, UserName = "Bran", Password = "pass1" });
             knownUsers.Add(new UserModel { Id = 00002, UserName = "Mo", Password = "pass2" });
             knownUsers.Add(new UserModel { Id = 00003, UserName = "Brean", Password = "pass3" });

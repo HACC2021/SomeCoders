@@ -20,9 +20,10 @@ namespace HACC_PetPickupNotifications.Controllers
             SecurityService securityService = new SecurityService();
             if (securityService.IsValidUserLogin(userModel))
             {
-                return View("LoginSuccess", userModel);
+                return View("PrimaryPage", userModel);
             } else
             {
+                //We want to change this to just bring up a message that says "Failed Login" instead of navigating to entirely new page
                 return View("LoginFailure", userModel);
             }
         }
