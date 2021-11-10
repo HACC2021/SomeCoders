@@ -28,6 +28,7 @@ namespace PetPickupSolution.Controllers
         }
 
         // GET: PetPickupModels/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +47,7 @@ namespace PetPickupSolution.Controllers
         }
 
         // GET: PetPickupModels/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +58,7 @@ namespace PetPickupSolution.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("PetID,PetMicroChipID,PetName,OwnerPhoneNumber")] PetPickupModel petPickupModel)
         {
             if (ModelState.IsValid)
@@ -68,6 +71,7 @@ namespace PetPickupSolution.Controllers
         }
 
         // GET: PetPickupModels/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +92,7 @@ namespace PetPickupSolution.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("PetID,PetMicroChipID,PetName,OwnerPhoneNumber")] PetPickupModel petPickupModel)
         {
             if (id != petPickupModel.PetID)
@@ -119,6 +124,7 @@ namespace PetPickupSolution.Controllers
         }
 
         // GET: PetPickupModels/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +145,7 @@ namespace PetPickupSolution.Controllers
         // POST: PetPickupModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var petPickupModel = await _context.PetPickupModel.FindAsync(id);
