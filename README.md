@@ -1,4 +1,3 @@
 # SomeCoders
-## Resources
-- Use https://www.youtube.com/watch?v=hslq7samP3Q for sending SMS messages
-- https://www.youtube.com/watch?v=VW_Rce5noaM - login page
+
+At this point, I can't figure out how to make a PR to update code to the main branch. As a result, all my code is still on the branch titled "master". Thank you.
