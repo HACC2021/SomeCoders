@@ -6,7 +6,7 @@ namespace PetPickupSolution.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //creating tables
+            //creating tables more comments
             migrationBuilder.CreateTable(
                 name: "PetPickupModel",
                 columns: table => new
