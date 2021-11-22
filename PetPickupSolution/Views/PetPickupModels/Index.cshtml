@@ -5,12 +5,13 @@
 }
 
 
-<h1>Index</h1>
+<h1>Pet Database</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add a pet</a>
 </p>
-<table class="table">
+
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -26,29 +27,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetMicroChipID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerPhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PetID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PetID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PetID">Delete</a>
-                @using (Html.BeginForm("SendSMS", "SMS", FormMethod.Post))
-                {
-                <input type="submit" name="sendSMSbutton" onclick="SendSMS" value="Send Message" />
-            }
-                <p></p>
-                <!--Here will be the button to send message-->
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PetMicroChipID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerPhoneNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PetID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PetID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PetID">Delete</a>
+                    @using (Html.BeginForm("SendSMS", "SMS", FormMethod.Post))
+                    {
+                        <input type="submit" name="sendSMSbutton" onclick="SendSMS" value="Send Message" />
+                    }
+                    <p></p>
+                    <!--Here will be the button to send message-->
                 </td>
             </tr>
-}
+        }
     </tbody>
 </table>

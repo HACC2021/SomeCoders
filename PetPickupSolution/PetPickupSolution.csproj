@@ -16,7 +16,16 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Twilio" Version="5.68.0" />
+    <PackageReference Include="Twilio.AspNet.Core" Version="5.37.2" />
     <PackageReference Include="Twilio.AspNet.Mvc" Version="5.37.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\HACC-with-Flag-final-1.png" />
   </ItemGroup>
 
 </Project>

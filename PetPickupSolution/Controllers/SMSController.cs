@@ -1,4 +1,4 @@
-﻿//using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,51 +12,58 @@ using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 
 using Twilio.TwiML;
-using Twilio.AspNet.Mvc;
+//using Twilio.AspNet.Mvc;
+using Twilio.AspNet.Core;
 using PetPickupSolution.Models;
+using Microsoft.Data.SqlClient;
 
 namespace PetPickupSolution.Controllers
 {
     public class SMSController : TwilioController
     {
 
-        //auth error here... think it has to do with a new authToken being generated... unable to send messages
+        //connect to database
+        string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
         //[HttpPost]
         public void SendSMS()
         {
-            //commenting out for now but before site is launched this needs to be implemented for security
-            //var accountSID = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
-            //var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
-
-            var accountSID = "ACb3e690d2ed4b17436d984e0225c16094";
-            var authToken = "48cb22c64f90bd1474ec96ac37f95dc3";
-            var testPhoneNumber = "+18084927514";
-            var testPetName = "Berry";
+            //implemented for security
+            var accountSID = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
+            var authToken = Environment.GetEnvironmentVariable("TWILIO_AUTH_TOKEN");
+            var testPhoneNumber = Environment.GetEnvironmentVariable("TEST_PHONE_NUMBER");
+            var testFromPhoneNumber = Environment.GetEnvironmentVariable("TEST_FROM_PHONE_NUMBER");
+            var testPetName = Environment.GetEnvironmentVariable("TEST_PET_NAME");
 
             TwilioClient.Init(accountSID, authToken);
 
             var message = MessageResource.Create(
                 body: testPetName + " is ready to be picked up!",
-                from: new Twilio.Types.PhoneNumber("+18082013388"),
+                from: new Twilio.Types.PhoneNumber(testFromPhoneNumber),
                 to: new Twilio.Types.PhoneNumber(testPhoneNumber)
             );
 
             Console.WriteLine(message.Sid);
         }
 
-        //[HttpPost] //not sure if we need the httppost
-        public TwiMLResult RecieveSMS()
+        //[HttpPost]
+        public void ReceiveSMS(string From, string Body, string connectionString)
         {
-            var messagingResponse = new MessagingResponse();
-            messagingResponse.Message("Your message has been recieved! Your phone number has been account to the your pet and you will recieve a text message when your pet" +
-                "is ready to be picked up.");
+            var twiml = new MessagingResponse();
+            //possibly add input validation
+            twiml.Message(From);
 
+            Console.WriteLine(From);
             //code to add phone number to db here
 
-            //this is causing errors, need to add SQL commands here
-            return TwiML(messagingResponse);
-        }
-        
+            //string queryString = "UPDATE PetPickupModel SET OwnerPhoneNumber = From WHERE PetMicroChipID = Body;";
+            
+            //using (SqlConnection connection = new SqlConnection(connectionString)
+            //{
+            //    SqlCommand command = new SqlCommand(queryString, connection);
+            //}
 
+            //return TwiML(twiml);
+        } 
     }
 }
