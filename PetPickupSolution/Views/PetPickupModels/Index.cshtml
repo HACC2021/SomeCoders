@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
+
 <h1>Index</h1>
 
 <p>
@@ -40,9 +41,14 @@
                 <a asp-action="Edit" asp-route-id="@item.PetID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.PetID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.PetID">Delete</a>
+                @using (Html.BeginForm("SendSMS", "SMS", FormMethod.Post))
+                {
+                <input type="submit" name="sendSMSbutton" onclick="SendSMS" value="Send Message" />
+            }
+                <p></p>
                 <!--Here will be the button to send message-->
-            </td>
-        </tr>
+                </td>
+            </tr>
 }
     </tbody>
 </table>
